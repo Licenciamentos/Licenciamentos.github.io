@@ -1,0 +1,75 @@
+/* sheetjs.css (C) 2014-present SheetJS -- http://sheetjs.com */
+/* vim: set ts=2: */
+#drop{
+  border:2px dashed #660000;
+  -moz-border-radius:5px;
+  -webkit-border-radius:5px;
+  border-radius:5px;
+  padding:20px;
+  text-align:center;
+  width:400px;
+  font:20pt bold,"Vollkorn";color:#660000;
+  right: 250px;
+}
+
+#left {
+  width:188px;
+  position:absolute;
+  right:1350px;
+    top: 25px;
+}
+
+
+#right {
+  position:absolute;
+  left:-100px;
+}
+#logo {
+  padding:25px;
+}
+#header {
+  height:168px;
+}
+
+.winpt { width:98%; }
+.success { color: #468847; }
+.error { color: #b94a48; }
+.info { color: #3a87ad; }
+pre { white-space: pre-wrap; }
+
+
+ <!-- CENTRAR TABELA -->table.center-all td,
+        th {
+			
+            text-align: center;
+        }
+
+        <!-- PESQUISA DO DATATABLES DO LADO ESQUERDO -->.pull-right {
+            float: right!important;
+        }
+
+        .pull-left {
+            float: left!important;
+        }
+
+        <!-- PESQUISA DE COLUNAS -->tfoot input {
+            width: 100%;
+            padding: 3px;
+            box-sizing: border-box;
+        }
+
+
+
+        .dataTables_filter {
+            display: none;
+        }
+		
+		
+		.sticky-wrapper {
+   	left: 30px;
+	top:30px;	
+    	position: fixed;
+    	
+	  }
+
+	 

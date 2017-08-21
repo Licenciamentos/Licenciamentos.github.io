@@ -80,7 +80,11 @@
                     $(this).html('<input type="text" placeholder="Pesquisa ' + title + '" />');
                 });
 
-
+		    //Esconder Drop
+	$(document).ready(function() {
+                $("#drop").hide();
+            });
+		    
                 //DataTable	
                 var table = $('#tabela-data').DataTable({
                     initComplete: function() {

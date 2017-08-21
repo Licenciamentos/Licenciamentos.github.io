@@ -15,8 +15,9 @@
 #left {
   width:188px;
   position:absolute;
-  right:150px;
+  right:170px;
     top: 25px;
+	width:100%; min-width:188px;
 }
 
 

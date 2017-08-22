@@ -20,7 +20,10 @@
 	
 }
 
-
+ .yellow {
+            background-color: yellow !important;
+        }
+		
 #right {
   position:absolute;
   left:-100px;

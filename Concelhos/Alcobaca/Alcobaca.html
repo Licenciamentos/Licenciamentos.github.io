@@ -484,11 +484,13 @@
                             sDefaultContent: ''
                         }],
 						"createdRow": function(row, data, dataIndex) {
-                        if (data['Licença de Exploração'] !== "undefined") {
+					
+                        if (data['Licença de Exploração'] != undefined) {
+							
                             $(row).addClass('yellow');
 
-                        }}
-                    
+                        }
+					}
 					
                 });
 
@@ -512,7 +514,7 @@
 
         <script src="assets/vendor/spin.js"></script>
 
-
+	
 
 
         <h1 align="center">LICENCIAMENTOS</h1>

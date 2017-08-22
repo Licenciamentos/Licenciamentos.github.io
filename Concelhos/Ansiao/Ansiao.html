@@ -415,13 +415,13 @@
                         }
                     ],
                     "createdRow": function(row, data, dataIndex) {
-                        if (data.Situação == "R") {
+					
+                        if (data['Licença de Exploração'] != undefined) {
+							
                             $(row).addClass('yellow');
 
                         }
-
-
-                    }
+					}
                 });
 
                 // Apply the search

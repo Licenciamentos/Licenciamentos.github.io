@@ -79,14 +79,15 @@
             });
 			
                 $("#tabela-data").show();
-               // Setup - add a text input to each footer cell
+                // Setup - add a text input to each footer cell
                 $('#tabela-data tfoot th').each(function() {
                     var title = $(this).text();
                     $(this).html('<input type="text" placeholder="Pesquisa ' + title + '" />');
                 });
 
+
             //DataTable	
-           var table = $('#tabela-data').DataTable({
+			var table = $('#tabela-data').DataTable({
 				initComplete: function() {
                         var r = $('#tabela-data tfoot tr');
                         r.find('th').each(function() {
@@ -108,7 +109,7 @@
 				{
                         "mData": "Situação",
 						"render": function(mData) {
-                            if (mData == 'POSTOS DE TRANSFORMAÇÃO PÚBLICOS' || mData == 'POSTOS DE TRANSFORMAÇÃO PRIVATIVOS' || mData == 'LINHAS DE MÉDIA TENSÃO (LIN)' || mData == 'LINHAS DE MÉDIA TENSÃO - INTERLIGAÇÕES (INT)' || mData == 'SUBESTAÇÕES/DIVERSOS') 
+                            if (mData == 'POSTOS DE TRANSFORMAÇÃO PÚBLICOS' || mData == 'POSTOS DE TRANSFORMAÇÃO PRIVATIVOS' || mData == 'LINHAS DE MÉDIA TENSÃO (LIN)' || mData == 'LINHAS DE MÉDIA TENSÃO' || mData == 'LINHAS DE MÉDIA TENSÃO - INTERLIGAÇÕES (INT)' || mData == 'POSTOS DE TRANSFORMAÇÃO PROVISÓRIOS' || mData == 'SUBESTAÇÕES/DIVERSOS') 
                                 {
                                     return null;
 								}else {
@@ -150,7 +151,18 @@
                         sDefaultContent: ''
                     },
 					{
+                        "mData": "SGD",
+
+                        sDefaultContent: ''
+                    },
+
+                    {
                         "mData": "EDIS",
+
+                        sDefaultContent: ''
+                    },
+					{
+                        "mData": "Licenciamento externo",
 
                         sDefaultContent: ''
                     },
@@ -176,7 +188,7 @@
                     },
 
                     {
-                        "mData": "DREC/DRELVT",
+                        "mData": "DRIEC/DRIEVLT",
                         "render": function(mData) {
                             if (mData != null) {
                                 if (moment(mData).format("DD/MM/YYYY") == 'Invalid date') {
@@ -202,7 +214,7 @@
                         },
                         sDefaultContent: ''
                     },
-					{
+						{
                         "mData": "Éditos - GBCI",
                         "render": function(mData) {
                             if (mData != null) {
@@ -242,8 +254,15 @@
                         },
                         sDefaultContent: ''
                     },
+
                     {
-                        "mData": "Estradas",
+                        "mData": "IP",
+
+                        sDefaultContent: ''
+                    },
+
+                    {
+                        "mData": "IP Taxas de Instrução do Processo - 500,00",
                         "render": function(mData) {
                             if (mData != null) {
                                 if (moment(mData).format("DD/MM/YYYY") != 'Invalid date') {
@@ -258,7 +277,7 @@
                         sDefaultContent: ''
                     },
 					   {
-                        "mData": "Data de Parecer da EP",
+                        "mData": "CCDR",
 						"render": function(mData) {
                             if (mData != null) {
                                 if (moment(mData).format("DD/MM/YYYY") != 'Invalid date') {
@@ -274,7 +293,7 @@
                     },
 
                     {
-                        "mData": "Data Parecer Auto Estradas",
+                        "mData": "Data de Parecer da EP",
                         "render": function(mData) {
                             if (mData != null) {
                                 if (moment(mData).format("DD/MM/YYYY") != 'Invalid date') {
@@ -289,15 +308,34 @@
 
                         sDefaultContent: ''
                     },
-                   
+
+                    {
+                        "mData": "Taxas",
+                        
+                        sDefaultContent: ''
+                    },
+					{
+                        "mData": "Caução",
+                        
+                        sDefaultContent: ''
+                    },
+					{
+                        "mData": "Alvará",
+                        
+                        sDefaultContent: ''
+                    },
 					{
                         "mData": "Refer",
                         
                         sDefaultContent: ''
                     },
-					
 					{
-                        "mData": "IGESPAR IP",
+                        "mData": "Parecer",
+                        
+                        sDefaultContent: ''
+                    },
+					{
+                        "mData": "Custos",
                         
                         sDefaultContent: ''
                     },
@@ -307,6 +345,12 @@
                         sDefaultContent: ''
                     },
 					{
+                        "mData": "Area Florestal",
+                        
+                        sDefaultContent: ''
+                    },
+				
+                    {
                         "mData": "Taxas-NI",
                         "render": function(mData) {
                             if (mData != null) {
@@ -376,7 +420,7 @@
                     },
 
                     {
-                        "mData": "Referência DRE 171/10\\.12/\\.\\.",
+                        "mData": "Referência DRE 161\\.10\\.10\\.",
 
                         sDefaultContent: ''
                     },
@@ -400,7 +444,7 @@
                     },
 
                     {
-                        "mData": "SGD",
+                        "mData": "SGD-",
 
                         sDefaultContent: ''
                     },
@@ -428,8 +472,8 @@
                         }
 					}
             });
-
-			// Apply the search
+		
+		 // Apply the search
                 table.columns().every(function() {
                     var that = this;
 
@@ -459,7 +503,7 @@
             <table id="tabela-data" class="cell-border" cellspacing="0" style="text-align:center; margin: 0 auto" width="100%">
                  <thead>
                 <tr>
-                    <th colspan="28"></th>
+                    <th colspan="36"></th>
                     <th colspan="3" stryle="text-align:center">INDEMNIZAÇÕES</th>
 
                 </tr>
@@ -470,30 +514,38 @@
                     <th style="text-align:center">S/A</th>
                     <th style="text-align:center">Nome</th>
                     <th style="text-align:center">Comprimento (m)</th>
+					<th style="text-align:center">SGD</th>
                     <th style="text-align:center">EDIS</th>
+					<th style="text-align:center">Licenciamento Externo</th>
                     <th style="text-align:center">Data de Execução</th>
                     <th style="text-align:center">APE</th>
-                    <th style="text-align:center">DREC/DRELVT</th>
+                    <th style="text-align:center">DRIEC/DRIELVT</th>
                     <th style="text-align:center">A-P-E-</th>
 					<th style="text-align:center">Éditos - GBCI</th>
                     <th style="text-align:center">GBCI - Recortes</th>
                     <th style="text-align:center">Éditos - ME</th>
-                    <th style="text-align:center">Estradas</th>
+                    <th style="text-align:center">I.P.</th>
+					<th style="text-align:center">I.P. - Taxa de Instrução de Processo 500,00</th>
+                    <th style="text-align:center">CCDR</th>
 					<th style="text-align:center">Data de Parecer da EP</th>
-                    <th style="text-align:center">Data Parecer Auto Estradas</th>
+                    <th style="text-align:center">Taxas</th>
+					<th style="text-align:center">Caução</th>
+                    <th style="text-align:center">Alvará</th>
 					<th style="text-align:center">Refer</th>
-					<th style="text-align:center">IGESPAR IP</th>
+					<th style="text-align:center">Parecer</th>
+					<th style="text-align:center">Custos</th>
 					<th style="text-align:center">ICN</th>
+					<th style="text-align:center">Área Florestal</th>
                     <th style="text-align:center">Taxas-NI</th>
                     <th style="text-align:center">Taxas-Pag.</th>
                     <th style="text-align:center">Licenciamento</th>
                     <th style="text-align:center">Pedido de Vistoria</th>
                     <th style="text-align:center">Licença de Exploração</th>
-                    <th style="text-align:center">Referência DRE 171/10.12/….</th>
+                    <th style="text-align:center">Referência DRE 161.10.10.</th>
                     <th style="text-align:center">Avisos</th>
                     <th style="text-align:center">Observações</th>
                     <th style="text-align:center">IF</th>
-                    <th style="text-align:center">SGD</th>
+                    <th style="text-align:center">SGD-</th>
                     <th style="text-align:center">DTA PGT</th>
                 </tr>
             </thead>
@@ -505,30 +557,38 @@
                     <th style="text-align:center">S/A</th>
                     <th style="text-align:center">Nome</th>
                     <th style="text-align:center">Comprimento (m)</th>
+					<th style="text-align:center">SGD</th>
                     <th style="text-align:center">EDIS</th>
+					<th style="text-align:center">Licenciamento Externo</th>
                     <th style="text-align:center">Data de Execução</th>
                     <th style="text-align:center">APE</th>
-                    <th style="text-align:center">DREC/DRELVT</th>
+                    <th style="text-align:center">DRIEC/DRIELVT</th>
                     <th style="text-align:center">A-P-E-</th>
 					<th style="text-align:center">Éditos - GBCI</th>
                     <th style="text-align:center">GBCI - Recortes</th>
                     <th style="text-align:center">Éditos - ME</th>
-                    <th style="text-align:center">Estradas</th>
+                    <th style="text-align:center">I.P.</th>
+					<th style="text-align:center">I.P. - Taxa de Instrução de Processo 500,00</th>
+                    <th style="text-align:center">CCDR</th>
 					<th style="text-align:center">Data de Parecer da EP</th>
-                    <th style="text-align:center">Data Parecer Auto Estradas</th>
+                    <th style="text-align:center">Taxas</th>
+					<th style="text-align:center">Caução</th>
+                    <th style="text-align:center">Alvará</th>
 					<th style="text-align:center">Refer</th>
-					<th style="text-align:center">IGESPAR IP</th>
+					<th style="text-align:center">Parecer</th>
+					<th style="text-align:center">Custos</th>
 					<th style="text-align:center">ICN</th>
+					<th style="text-align:center">Área Florestal</th>
                     <th style="text-align:center">Taxas-NI</th>
                     <th style="text-align:center">Taxas-Pag.</th>
                     <th style="text-align:center">Licenciamento</th>
                     <th style="text-align:center">Pedido de Vistoria</th>
                     <th style="text-align:center">Licença de Exploração</th>
-                    <th style="text-align:center">Referência DRE 171/10.12/….</th>
+                    <th style="text-align:center">Referência DRE 161.10.10.</th>
                     <th style="text-align:center">Avisos</th>
                     <th style="text-align:center">Observações</th>
                     <th style="text-align:center">IF</th>
-                    <th style="text-align:center">SGD</th>
+                    <th style="text-align:center">SGD-</th>
                     <th style="text-align:center">DTA PGT</th>
                 </tr>
                 </tfoot>
@@ -545,6 +605,9 @@
 </body>
 <style>
 footer {
+font-style: italic;
+left: 15%;
+	text-align: center;
     position: absolute;
     width: 100%;
     bottom: 0px;

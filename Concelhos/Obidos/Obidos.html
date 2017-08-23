@@ -79,15 +79,14 @@
             });
 			
                 $("#tabela-data").show();
-                // Setup - add a text input to each footer cell
+               // Setup - add a text input to each footer cell
                 $('#tabela-data tfoot th').each(function() {
                     var title = $(this).text();
                     $(this).html('<input type="text" placeholder="Pesquisa ' + title + '" />');
                 });
 
-
             //DataTable	
-			var table = $('#tabela-data').DataTable({
+           var table = $('#tabela-data').DataTable({
 				initComplete: function() {
                         var r = $('#tabela-data tfoot tr');
                         r.find('th').each(function() {
@@ -109,7 +108,7 @@
 				{
                         "mData": "Situação",
 						"render": function(mData) {
-                            if (mData == 'POSTOS DE TRANSFORMAÇÃO PÚBLICOS' || mData == 'POSTOS DE TRANSFORMAÇÃO PRIVATIVOS' || mData == 'LINHAS DE MÉDIA TENSÃO (LIN)' || mData == 'LINHAS DE MÉDIA TENSÃO' || mData == 'LINHAS DE MÉDIA TENSÃO - INTERLIGAÇÕES (INT)' || mData == 'POSTOS DE TRANSFORMAÇÃO PROVISÓRIOS' || mData == 'SUBESTAÇÕES/DIVERSOS') 
+                            if (mData == 'POSTOS DE TRANSFORMAÇÃO PÚBLICOS' || mData == 'POSTOS DE TRANSFORMAÇÃO PRIVATIVOS' || mData == 'LINHAS DE MÉDIA TENSÃO (LIN)' || mData == 'LINHAS DE MÉDIA TENSÃO - INTERLIGAÇÕES (INT)' || mData == 'SUBESTAÇÕES/DIVERSOS') 
                                 {
                                     return null;
 								}else {
@@ -151,18 +150,7 @@
                         sDefaultContent: ''
                     },
 					{
-                        "mData": "SGD",
-
-                        sDefaultContent: ''
-                    },
-
-                    {
                         "mData": "EDIS",
-
-                        sDefaultContent: ''
-                    },
-					{
-                        "mData": "Licenciamento externo",
 
                         sDefaultContent: ''
                     },
@@ -188,7 +176,7 @@
                     },
 
                     {
-                        "mData": "DRIEC/DRIEVLT",
+                        "mData": "DREC/DRELVT",
                         "render": function(mData) {
                             if (mData != null) {
                                 if (moment(mData).format("DD/MM/YYYY") == 'Invalid date') {
@@ -214,7 +202,7 @@
                         },
                         sDefaultContent: ''
                     },
-						{
+					{
                         "mData": "Éditos - GBCI",
                         "render": function(mData) {
                             if (mData != null) {
@@ -254,15 +242,8 @@
                         },
                         sDefaultContent: ''
                     },
-
                     {
-                        "mData": "IP",
-
-                        sDefaultContent: ''
-                    },
-
-                    {
-                        "mData": "IP Taxas de Instrução do Processo - 500,00",
+                        "mData": "Estradas",
                         "render": function(mData) {
                             if (mData != null) {
                                 if (moment(mData).format("DD/MM/YYYY") != 'Invalid date') {
@@ -277,7 +258,7 @@
                         sDefaultContent: ''
                     },
 					   {
-                        "mData": "CCDR",
+                        "mData": "Data de Parecer da EP",
 						"render": function(mData) {
                             if (mData != null) {
                                 if (moment(mData).format("DD/MM/YYYY") != 'Invalid date') {
@@ -293,7 +274,7 @@
                     },
 
                     {
-                        "mData": "Data de Parecer da EP",
+                        "mData": "Data Parecer Auto Estradas",
                         "render": function(mData) {
                             if (mData != null) {
                                 if (moment(mData).format("DD/MM/YYYY") != 'Invalid date') {
@@ -308,34 +289,15 @@
 
                         sDefaultContent: ''
                     },
-
-                    {
-                        "mData": "Taxas",
-                        
-                        sDefaultContent: ''
-                    },
-					{
-                        "mData": "Caução",
-                        
-                        sDefaultContent: ''
-                    },
-					{
-                        "mData": "Alvará",
-                        
-                        sDefaultContent: ''
-                    },
+                   
 					{
                         "mData": "Refer",
                         
                         sDefaultContent: ''
                     },
+					
 					{
-                        "mData": "Parecer",
-                        
-                        sDefaultContent: ''
-                    },
-					{
-                        "mData": "Custos",
+                        "mData": "IGESPAR IP",
                         
                         sDefaultContent: ''
                     },
@@ -345,12 +307,6 @@
                         sDefaultContent: ''
                     },
 					{
-                        "mData": "Area Florestal",
-                        
-                        sDefaultContent: ''
-                    },
-				
-                    {
                         "mData": "Taxas-NI",
                         "render": function(mData) {
                             if (mData != null) {
@@ -420,7 +376,7 @@
                     },
 
                     {
-                        "mData": "Referência DRE 161\\.10\\.10\\.",
+                        "mData": "Referência DRE 171/10\\.12/\\.\\.",
 
                         sDefaultContent: ''
                     },
@@ -444,7 +400,7 @@
                     },
 
                     {
-                        "mData": "SGD-",
+                        "mData": "SGD",
 
                         sDefaultContent: ''
                     },
@@ -472,8 +428,8 @@
                         }
 					}
             });
-		
-		 // Apply the search
+
+			// Apply the search
                 table.columns().every(function() {
                     var that = this;
 

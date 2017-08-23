@@ -85,9 +85,8 @@
                     $(this).html('<input type="text" placeholder="Pesquisa ' + title + '" />');
                 });
 
-
             //DataTable	
-			var table = $('#tabela-data').DataTable({
+           var table = $('#tabela-data').DataTable({
 				initComplete: function() {
                         var r = $('#tabela-data tfoot tr');
                         r.find('th').each(function() {
@@ -104,12 +103,12 @@
 					"previous":   "Anterior"
                 },
 				
-                "aaData": json,
+                "aaData": result,
                 "aoColumns": [
 				{
                         "mData": "Situação",
 						"render": function(mData) {
-                            if (mData == 'POSTOS DE TRANSFORMAÇÃO PÚBLICOS' || mData == 'POSTOS DE TRANSFORMAÇÃO PRIVATIVOS' || mData == 'LINHAS DE MÉDIA TENSÃO (LIN)' || mData == 'LINHAS DE MÉDIA TENSÃO' || mData == 'LINHAS DE MÉDIA TENSÃO - INTERLIGAÇÕES (INT)' || mData == 'POSTOS DE TRANSFORMAÇÃO PROVISÓRIOS' || mData == 'SUBESTAÇÕES/DIVERSOS') 
+                            if (mData == 'POSTOS DE TRANSFORMAÇÃO PÚBLICOS' || mData == 'POSTOS DE TRANSFORMAÇÃO PRIVATIVOS' || mData == 'LINHAS DE MÉDIA TENSÃO (LIN)' || mData == 'LINHAS DE MÉDIA TENSÃO - INTERLIGAÇÕES (INT)' || mData == 'SUBESTAÇÕES/DIVERSOS') 
                                 {
                                     return null;
 								}else {
@@ -151,22 +150,15 @@
                         sDefaultContent: ''
                     },
 					{
-                        "mData": "SGD",
-
-                        sDefaultContent: ''
-                    },
-
-                    {
                         "mData": "EDIS",
 
                         sDefaultContent: ''
                     },
 					{
-                        "mData": "Licenciamento externo",
+                        "mData": "Licenciamento Externo",
 
                         sDefaultContent: ''
                     },
-
                     {
                         "mData": "Data de Execução",
                         "render": function(mData) {
@@ -214,7 +206,7 @@
                         },
                         sDefaultContent: ''
                     },
-						{
+					{
                         "mData": "Éditos - GBCI",
                         "render": function(mData) {
                             if (mData != null) {
@@ -254,15 +246,38 @@
                         },
                         sDefaultContent: ''
                     },
-
                     {
-                        "mData": "IP",
+                        "mData": "BRISA",
+                        "render": function(mData) {
+                            if (mData != null) {
+                                if (moment(mData).format("DD/MM/YYYY") != 'Invalid date') {
 
+                                    return moment(mData).format("DD/MM/YYYY");
+
+                                } else {
+                                    return mData;
+                                }
+                            }
+                        },
                         sDefaultContent: ''
                     },
+					{
+                        "mData": "AG.PORT. DO AMBIENTE",
+                        "render": function(mData) {
+                            if (mData != null) {
+                                if (moment(mData).format("DD/MM/YYYY") != 'Invalid date') {
 
-                    {
-                        "mData": "IP Taxas de Instrução do Processo - 500,00",
+                                    return moment(mData).format("DD/MM/YYYY");
+
+                                } else {
+                                    return mData;
+                                }
+                            }
+                        },
+                        sDefaultContent: ''
+                    },
+					{
+                        "mData": "AELO",
                         "render": function(mData) {
                             if (mData != null) {
                                 if (moment(mData).format("DD/MM/YYYY") != 'Invalid date') {
@@ -277,7 +292,7 @@
                         sDefaultContent: ''
                     },
 					   {
-                        "mData": "CCDR",
+                        "mData": "Estradas",
 						"render": function(mData) {
                             if (mData != null) {
                                 if (moment(mData).format("DD/MM/YYYY") != 'Invalid date') {
@@ -293,7 +308,7 @@
                     },
 
                     {
-                        "mData": "Data de Parecer da EP",
+                        "mData": "Refer",
                         "render": function(mData) {
                             if (mData != null) {
                                 if (moment(mData).format("DD/MM/YYYY") != 'Invalid date') {
@@ -308,49 +323,19 @@
 
                         sDefaultContent: ''
                     },
-
-                    {
-                        "mData": "Taxas",
-                        
-                        sDefaultContent: ''
-                    },
-					{
-                        "mData": "Caução",
-                        
-                        sDefaultContent: ''
-                    },
-					{
-                        "mData": "Alvará",
-                        
-                        sDefaultContent: ''
-                    },
-					{
-                        "mData": "Refer",
-                        
-                        sDefaultContent: ''
-                    },
-					{
-                        "mData": "Parecer",
-                        
-                        sDefaultContent: ''
-                    },
-					{
-                        "mData": "Custos",
-                        
-                        sDefaultContent: ''
-                    },
+                   
 					{
                         "mData": "ICN",
                         
                         sDefaultContent: ''
                     },
+					
 					{
-                        "mData": "Area Florestal",
+                        "mData": "AG\\. PORT AMBIENTE",
                         
                         sDefaultContent: ''
                     },
-				
-                    {
+					{
                         "mData": "Taxas-NI",
                         "render": function(mData) {
                             if (mData != null) {
@@ -420,7 +405,7 @@
                     },
 
                     {
-                        "mData": "Referência DRE 161\\.10\\.10\\.",
+                        "mData": "Referência DRE 171/14\\.21/\\.\\.",
 
                         sDefaultContent: ''
                     },
@@ -444,7 +429,7 @@
                     },
 
                     {
-                        "mData": "SGD-",
+                        "mData": "SGD",
 
                         sDefaultContent: ''
                     },
@@ -472,8 +457,8 @@
                         }
 					}
             });
-		
-		 // Apply the search
+
+			// Apply the search
                 table.columns().every(function() {
                     var that = this;
 
@@ -504,7 +489,7 @@
             <thead>
                 <tr>
                     <th colspan="30"></th>
-                    <th colspan="3" stryle="text-align:center">INDEMNIZAÇÕES</th>
+                    <th colspan="3" style="text-align:center">INDEMNIZAÇÕES</th>
 
                 </tr>
                 <tr>
@@ -545,7 +530,7 @@
             </thead>
             <tfoot>
                 <tr>
-                    <th style="text-align:center">Situação</th>
+                   <th style="text-align:center">Situação</th>
                     <th style="text-align:center">Nº PT</th>
                     <th style="text-align:center">kV</th>
                     <th style="text-align:center">S/A</th>

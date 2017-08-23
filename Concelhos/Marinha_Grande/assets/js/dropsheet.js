@@ -59,7 +59,7 @@ var DropSheet = function DropSheet(opts) {
 		if(useworker && workbook.SSF) XLSX.SSF.load_table(workbook.SSF);
 		var result = {};
 		var sheet_name = workbook.SheetNames[0];
-			var roa = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[12]], {range:4});
+			var roa = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[14]], {range:4});
 			tabela(roa);
 		console.log(roa);
 		return result;

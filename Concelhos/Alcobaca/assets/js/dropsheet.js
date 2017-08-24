@@ -67,17 +67,7 @@ var DropSheet = function DropSheet(opts) {
 				break;
 			}
 			
-		}
-		if(workbook.SheetNames[c]!=="ACB"){
-				alertify.alert('Infelizmente houve um erro na leitura do ficheiro. Clique em OK para retroceder.',function(){javascript:history.go(-1);});
-		}
-			console.log(workbook.SheetNames[c]);
-			console.log(workbook.SheetNames[3]);
-			var roa = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[c]], {range:4});
-			tabela(roa);
-		console.log(roa);
-		return result;
-	}
+		}	
 		
 		console.log(workbook.SheetNames[c]);
 			console.log(workbook.SheetNames[3]);

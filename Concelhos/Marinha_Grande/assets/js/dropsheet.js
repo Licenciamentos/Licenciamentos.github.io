@@ -63,12 +63,12 @@ var DropSheet = function DropSheet(opts) {
 		for (i = 0 ; i<30 ; i++){
 			c++;
 			console.log(c);
-			if(workbook.SheetNames[c]=="MRG"){
+			if(workbook.SheetNames[c]=="MGR"){
 				break;
 			}
 			
 		}
-		if(workbook.SheetNames[c]!=="MRG"){
+		if(workbook.SheetNames[c]!=="MGR"){
 				alertify.alert('Infelizmente ocorreu um erro na leitura do ficheiro. Clique em OK para retroceder.',function(){javascript:history.go(-1);});
 		}
 			console.log(workbook.SheetNames[c]);

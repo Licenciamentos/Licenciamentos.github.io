@@ -69,7 +69,7 @@ var DropSheet = function DropSheet(opts) {
 			
 		}
 		if(workbook.SheetNames[c]!=="ACB"){
-				alertify.alert('Infelizmente houve um erro na leitura do ficheiro. Clique em OK para retroceder.',function(){javascript:history.go(-1);});
+				alertify.alert('Infelizmente ocorreu um erro na leitura do ficheiro. Clique em OK para retroceder.',function(){javascript:history.go(-1);});
 		}
 			console.log(workbook.SheetNames[c]);
 			console.log(workbook.SheetNames[3]);

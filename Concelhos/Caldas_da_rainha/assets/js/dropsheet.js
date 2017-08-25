@@ -58,8 +58,22 @@ var DropSheet = function DropSheet(opts) {
 	function to_json(workbook) {
 		if(useworker && workbook.SSF) XLSX.SSF.load_table(workbook.SSF);
 		var result = {};
-		var sheet_name = workbook.SheetNames[0];
-			var roa = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[10]], {range:4});
+		var i=0, c=0;
+		
+		for (i = 0 ; i<30 ; i++){
+			c++;
+			console.log(c);
+			if(workbook.SheetNames[c]=="CLD"){
+				break;
+			}
+			
+		}
+		if(workbook.SheetNames[c]!=="CLD"){
+				alertify.alert('Infelizmente ocorreu um erro na leitura do ficheiro. Clique em OK para retroceder.',function(){javascript:history.go(-1);});
+		}
+			console.log(workbook.SheetNames[c]);
+			console.log(workbook.SheetNames[3]);
+			var roa = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[c]], {range:4});
 			tabela(roa);
 		console.log(roa);
 		return result;

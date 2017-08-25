@@ -494,20 +494,7 @@
 					
                 });
 				
-                // Apply the search
-                table.columns().every(function() {
-                    var that = this;
-
-                    $('input', this.footer()).on('keyup change', function() {
-                        if (that.search() !== this.value) {
-                            that
-                                .search(this.value)
-                                .draw();
-                        }
-                    });
-                });
-				
-				$('#example tbody').on( 'click', 'tr', function () {
+							$('#example tbody').on( 'click', 'tr', function () {
 					if ( $(this).hasClass('selected') ) {
 						$(this).removeClass('selected');
 					}
@@ -521,8 +508,22 @@
 					table.row('.selected').remove().draw( false );
 				} );
 
+
+                // Apply the search
+                table.columns().every(function() {
+                    var that = this;
+
+                    $('input', this.footer()).on('keyup change', function() {
+                        if (that.search() !== this.value) {
+                            that
+                                .search(this.value)
+                                .draw();
+                        }
+                    });
+                });
+	});
             }
-			});
+		
         </script>
         <script src="assets/js/main.js"></script>
 

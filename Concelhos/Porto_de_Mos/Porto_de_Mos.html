@@ -93,6 +93,18 @@
                             $('#tabela-data thead').append(r);
                             $('#search_0').css('text-align', 'center');
                         },
+                        "fnDrawCallback": function() {
+                            $('table#tabela-data td').bind('mouseenter', function() {
+                                $(this).parent().children().each(function() {
+                                    $(this).addClass('datatablerowhighlight');
+                                });
+                            });
+                            $('table#tabela-data td').bind('mouseleave', function() {
+                                $(this).parent().children().each(function() {
+                                    $(this).removeClass('datatablerowhighlight');
+                                });
+                            });
+                        },
                         "language": {
                             "lengthMenu": "Apresentar _MENU_ linhas por página",
                             "search": "Pesquisar:",

@@ -4,21 +4,21 @@
 <head>
     <title>Alcobaça</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-   
+
     <link rel="stylesheet" href="assets/css/sheetjs.css">
 
-	
-	<div class="sticky-wrapper" align="left">
-		<a    href="https://licenciamentos.github.io/index.html">
+
+    <div class="sticky-wrapper" align="left">
+        <a href="https://licenciamentos.github.io/index.html">
 			<img class = "home"  border="0"  src="https://licenciamentos.github.io/home.png" width="50" height="50">
 	 
 		</a>
-	</div>	
-<link rel="icon" href="https://licenciamentos.github.io/favicon.ico">
+    </div>
+    <link rel="icon" href="https://licenciamentos.github.io/favicon.ico">
 </head>
 
 
-<body >
+<body>
 
 
 
@@ -33,7 +33,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.15/datatables.min.css" />
     <script type="text/javascript" src="https://cdn.datatables.net/r/bs-3.3.5/jqc-1.11.3,dt-1.10.8/datatables.min.js"></script>
-  <script src="moment.js"></script>
+    <script src="moment.js"></script>
     <script>
         moment().format();
     </script>
@@ -62,16 +62,14 @@
         <script src="//rawgit.com/SheetJS/js-xlsx/master/dist/xlsx.full.min.js"></script>
         <script src="assets/js/dropsheet.js"></script>
         <script>
-		
-		
-		$(window).scroll(function() {
- 	 var max_width = 990;   
- 	 if ($(window).width() < max_width) {
-	    $('.sticky-wrapper').css('margin-left', -$(this).scrollLeft() + "px");
- 	 }
-	});
-	
-	
+            $(window).scroll(function() {
+                var max_width = 990;
+                if ($(window).width() < max_width) {
+                    $('.sticky-wrapper').css('margin-left', -$(this).scrollLeft() + "px");
+                }
+            });
+
+
             function tabela(json) {
                 $("#tabela-data").show();
                 // Setup - add a text input to each footer cell
@@ -80,554 +78,568 @@
                     $(this).html('<input type="text" placeholder="Pesquisa ' + title + '" />');
                 });
 
-		    //Esconder Drop
-	$(document).ready(function() {
-                $("#drop").hide();
-            
-		    
-                //DataTable	
-                var table = $('#tabela-data').DataTable({
-                    initComplete: function() {
-                        var r = $('#tabela-data tfoot tr');
-                        r.find('th').each(function() {
-                            $(this).css('padding', 8);
-                        });
-                        $('#tabela-data thead').append(r);
-                        $('#search_0').css('text-align', 'center');
-                    },
-					
-					
-                    "language": {
-                        "lengthMenu": "Apresentar _MENU_ linhas por página",
-                        "search": "Pesquisar:",
-                        "info": "Apresentadas _START_ a _END_ de _TOTAL_ linhas",
-                        "next": "Próximo",
-                        "previous": "Anterior"
-                    },
+                //Esconder Drop
+                $(document).ready(function() {
+                    $("#drop").hide();
 
-                    destroy: true,
-                    "aaData": json,
-                    "aoColumns": [{
-                            "mData": "Situação",
-                            "render": function(mData) {
-                                if (mData == 'POSTOS DE TRANSFORMAÇÃO PÚBLICOS' || mData == 'POSTOS DE TRANSFORMAÇÃO PRIVATIVOS' || mData == 'LINHAS DE MÉDIA TENSÂO (LIN)' || mData == 'LINHAS DE MÉDIA TENSÂO - INTERLIGAÇÕES (INT)' || mData == 'SUBESTAÇÕES - POSTOS DE SECCIONAMENTO' || mData == 'INSTALAÇÕES PROVISÓRIAS') {
-                                    return null;
-                                } else {
-                                    return mData;
-                                }
 
-                            },
-
-                            sDefaultContent: ''
+                    //DataTable	
+                    var table = $('#tabela-data').DataTable({
+                        initComplete: function() {
+                            var r = $('#tabela-data tfoot tr');
+                            r.find('th').each(function() {
+                                $(this).css('padding', 8);
+                            });
+                            $('#tabela-data thead').append(r);
+                            $('#search_0').css('text-align', 'center');
+                        },
+                        "fnDrawCallback": function() {
+                            $('table#tabela-data td').bind('mouseenter', function() {
+                                $(this).parent().children().each(function() {
+                                    $(this).addClass('datatablerowhighlight');
+                                });
+                            });
+                            $('table#tabela-data td').bind('mouseleave', function() {
+                                $(this).parent().children().each(function() {
+                                    $(this).removeClass('datatablerowhighlight');
+                                });
+                            });
                         },
 
-                        {
-                            "mData": "Nº PT",
-
-                            sDefaultContent: ''
+                        "language": {
+                            "lengthMenu": "Apresentar _MENU_ linhas por página",
+                            "search": "Pesquisar:",
+                            "info": "Apresentadas _START_ a _END_ de _TOTAL_ linhas",
+                            "next": "Próximo",
+                            "previous": "Anterior"
                         },
 
-                        {
-                            "mData": "KV",
-
-                            sDefaultContent: ''
-                        },
-
-                        {
-                            "mData": "S/A",
-
-                            sDefaultContent: ''
-                        },
-
-                        {
-                            "mData": "Nome",
-
-                            sDefaultContent: ''
-                        },
-
-                        {
-                            "mData": "Comprimento (m)",
-
-                            sDefaultContent: ''
-                        },
-
-                        {
-                            "mData": "EDIS",
-
-                            sDefaultContent: ''
-                        },
-
-                        {
-                            "mData": "Licenciamento Externo",
-
-                            sDefaultContent: ''
-                        },
-
-                        {
-                            "mData": "Execução",
-                            "render": function(mData) {
-                                if (mData != null) {
-                                    if (moment(mData).format("DD/MM/YYYY") == 'Invalid date') {
-                                        return mData;
-                                    } else {
-                                        return moment(mData).format("DD/MM/YYYY");
-                                    }
-                                }
-                            },
-
-                            sDefaultContent: ''
-                        },
-                        {
-                            "mData": "APE",
-
-                            sDefaultContent: ''
-                        },
-
-                        {
-                            "mData": "DREC/DRELVT",
-                            "render": function(mData) {
-                                if (mData != null) {
-                                    if (moment(mData).format("DD/MM/YYYY") == 'Invalid date') {
-                                        return mData;
-                                    } else {
-                                        return moment(mData).format("DD/MM/YYYY");
-                                    }
-                                }
-                            },
-
-                            sDefaultContent: ''
-                        },
-                        {
-                            "mData": "A-P-E-",
-                            "render": function(mData) {
-                                if (mData != null) {
-                                    if (moment(mData).format("DD/MM/YYYY") == 'Invalid date') {
-                                        return mData;
-                                    } else {
-                                        return moment(mData).format("DD/MM/YYYY");
-                                    }
-                                }
-                            },
-                            sDefaultContent: ''
-                        },
-
-                        {
-                            "mData": "Éditos - GBCI",
-                            "render": function(mData) {
-                                if (mData != null) {
-                                    if (moment(mData).format("DD/MM/YYYY") == 'Invalid date') {
-                                        return mData;
-                                    } else {
-                                        return moment(mData).format("DD/MM/YYYY");
-                                    }
-                                }
-                            },
-                            sDefaultContent: ''
-                        },
-
-                        {
-                            "mData": "GBCI - Recortes",
-                            "render": function(mData) {
-                                if (mData != null) {
-                                    if (moment(mData).format("DD/MM/YYYY") == 'Invalid date') {
-                                        return mData;
-                                    } else {
-                                        return moment(mData).format("DD/MM/YYYY");
-                                    }
-                                }
-                            },
-                            sDefaultContent: ''
-                        },
-
-                        {
-                            "mData": "Éditos - ME",
-                            "render": function(mData) {
-                                if (mData != null) {
-                                    if (moment(mData).format("DD/MM/YYYY") == 'Invalid date') {
-                                        return mData;
-                                    } else {
-                                        return moment(mData).format("DD/MM/YYYY");
-                                    }
-                                }
-                            },
-                            sDefaultContent: ''
-                        },
-
-                        {
-                            "mData": "AELO",
-
-                            sDefaultContent: ''
-                        },
-
-                        {
-                            "mData": "Portugal Telecom",
-
-                            sDefaultContent: ''
-                        },
-
-                        {
-                            "mData": "IP",
-
-                            sDefaultContent: ''
-                        },
-
-                        {
-                            "mData": "IP - Taxa de Instrução de Processo, 500,00",
-
-                            sDefaultContent: ''
-                        },
-
-                        {
-                            "mData": "IP - Taxa Ocupação Espaço Aéreo (4,50) e Taxa Ocupação Temporária (8,00)",
-
-                            sDefaultContent: ''
-                        },
-
-                        {
-                            "mData": "IP - Taxa Ocupação Temporária ZE-Portaria nº 357/2015 de 14 de Outubro art\\.4º-200,00 Euros",
-
-                            sDefaultContent: ''
-                        },
-
-                        {
-                            "mData": "Data de Parecer da EP",
-                            "render": function(mData) {
-                                if (mData != null) {
-                                    if (moment(mData).format("DD/MM/YYYY") != 'Invalid date') {
-
-                                        return moment(mData).format("DD/MM/YYYY");
-
+                        destroy: true,
+                        "aaData": json,
+                        "aoColumns": [{
+                                "mData": "Situação",
+                                "render": function(mData) {
+                                    if (mData == 'POSTOS DE TRANSFORMAÇÃO PÚBLICOS' || mData == 'POSTOS DE TRANSFORMAÇÃO PRIVATIVOS' || mData == 'LINHAS DE MÉDIA TENSÂO (LIN)' || mData == 'LINHAS DE MÉDIA TENSÂO - INTERLIGAÇÕES (INT)' || mData == 'SUBESTAÇÕES - POSTOS DE SECCIONAMENTO' || mData == 'INSTALAÇÕES PROVISÓRIAS') {
+                                        return null;
                                     } else {
                                         return mData;
                                     }
-                                }
+
+                                },
+
+                                sDefaultContent: ''
                             },
-                            sDefaultContent: ''
-                        },
 
-                        {
-                            "mData": "Alvará Licença",
-                            "render": function(mData) {
-                                if (mData != null) {
-                                    if (moment(mData).format("DD/MM/YYYY") != 'Invalid date') {
+                            {
+                                "mData": "Nº PT",
 
-                                        return moment(mData).format("DD/MM/YYYY");
+                                sDefaultContent: ''
+                            },
 
-                                    } else {
-                                        return mData;
+                            {
+                                "mData": "KV",
+
+                                sDefaultContent: ''
+                            },
+
+                            {
+                                "mData": "S/A",
+
+                                sDefaultContent: ''
+                            },
+
+                            {
+                                "mData": "Nome",
+
+                                sDefaultContent: ''
+                            },
+
+                            {
+                                "mData": "Comprimento (m)",
+
+                                sDefaultContent: ''
+                            },
+
+                            {
+                                "mData": "EDIS",
+
+                                sDefaultContent: ''
+                            },
+
+                            {
+                                "mData": "Licenciamento Externo",
+
+                                sDefaultContent: ''
+                            },
+
+                            {
+                                "mData": "Execução",
+                                "render": function(mData) {
+                                    if (mData != null) {
+                                        if (moment(mData).format("DD/MM/YYYY") == 'Invalid date') {
+                                            return mData;
+                                        } else {
+                                            return moment(mData).format("DD/MM/YYYY");
+                                        }
                                     }
-                                }
+                                },
+
+                                sDefaultContent: ''
+                            },
+                            {
+                                "mData": "APE",
+
+                                sDefaultContent: ''
                             },
 
-                            sDefaultContent: ''
-                        },
-
-                        {
-                            "mData": "Refer(Infraestruturas de Portugal CN-NI)",
-                            "render": function(mData) {
-                                if (mData != null) {
-                                    if (moment(mData).format("DD/MM/YYYY") == 'Invalid date') {
-                                        return mData;
-                                    } else {
-                                        return moment(mData).format("DD/MM/YYYY");
+                            {
+                                "mData": "DREC/DRELVT",
+                                "render": function(mData) {
+                                    if (mData != null) {
+                                        if (moment(mData).format("DD/MM/YYYY") == 'Invalid date') {
+                                            return mData;
+                                        } else {
+                                            return moment(mData).format("DD/MM/YYYY");
+                                        }
                                     }
-                                }
+                                },
+
+                                sDefaultContent: ''
                             },
-                            sDefaultContent: ''
-                        },
-
-                        {
-                            "mData": "Refer",
-
-                            sDefaultContent: ''
-                        },
-
-                        {
-                            "mData": "PNSAC",
-                            "render": function(mData) {
-                                if (mData != null) {
-                                    if (moment(mData).format("DD/MM/YYYY") == 'Invalid date') {
-                                        return mData;
-                                    } else {
-                                        return moment(mData).format("DD/MM/YYYY");
+                            {
+                                "mData": "A-P-E-",
+                                "render": function(mData) {
+                                    if (mData != null) {
+                                        if (moment(mData).format("DD/MM/YYYY") == 'Invalid date') {
+                                            return mData;
+                                        } else {
+                                            return moment(mData).format("DD/MM/YYYY");
+                                        }
                                     }
-                                }
+                                },
+                                sDefaultContent: ''
                             },
-                            sDefaultContent: ''
-                        },
 
-                        {
-                            "mData": "ICN",
-                            "render": function(mData) {
-                                if (mData != null) {
-                                    if (moment(mData).format("DD/MM/YYYY") == 'Invalid date') {
-                                        return mData;
-                                    } else {
-                                        return moment(mData).format("DD/MM/YYYY");
+                            {
+                                "mData": "Éditos - GBCI",
+                                "render": function(mData) {
+                                    if (mData != null) {
+                                        if (moment(mData).format("DD/MM/YYYY") == 'Invalid date') {
+                                            return mData;
+                                        } else {
+                                            return moment(mData).format("DD/MM/YYYY");
+                                        }
                                     }
-                                }
+                                },
+                                sDefaultContent: ''
                             },
-                            sDefaultContent: ''
-                        },
 
-                        {
-                            "mData": "Taxas-NI",
-                            "render": function(mData) {
-                                if (mData != null) {
-                                    if (moment(mData).format("DD/MM/YYYY") == 'Invalid date') {
-                                        return mData;
-                                    } else {
-                                        return moment(mData).format("DD/MM/YYYY");
+                            {
+                                "mData": "GBCI - Recortes",
+                                "render": function(mData) {
+                                    if (mData != null) {
+                                        if (moment(mData).format("DD/MM/YYYY") == 'Invalid date') {
+                                            return mData;
+                                        } else {
+                                            return moment(mData).format("DD/MM/YYYY");
+                                        }
                                     }
-                                }
+                                },
+                                sDefaultContent: ''
                             },
-                            sDefaultContent: ''
-                        },
 
-                        {
-                            "mData": "Taxas-Pag",
-                            "render": function(mData) {
-                                if (mData != null) {
-                                    if (moment(mData).format("DD/MM/YYYY") == 'Invalid date') {
-                                        return mData;
-                                    } else {
-                                        return moment(mData).format("DD/MM/YYYY");
+                            {
+                                "mData": "Éditos - ME",
+                                "render": function(mData) {
+                                    if (mData != null) {
+                                        if (moment(mData).format("DD/MM/YYYY") == 'Invalid date') {
+                                            return mData;
+                                        } else {
+                                            return moment(mData).format("DD/MM/YYYY");
+                                        }
                                     }
-                                }
+                                },
+                                sDefaultContent: ''
                             },
-                            sDefaultContent: ''
-                        },
 
-                        {
-                            "mData": "Licenciamento",
-                            "render": function(mData) {
-                                if (mData != null) {
-                                    if (moment(mData).format("DD/MM/YYYY") == 'Invalid date') {
-                                        return mData;
-                                    } else {
-                                        return moment(mData).format("DD/MM/YYYY");
+                            {
+                                "mData": "AELO",
+
+                                sDefaultContent: ''
+                            },
+
+                            {
+                                "mData": "Portugal Telecom",
+
+                                sDefaultContent: ''
+                            },
+
+                            {
+                                "mData": "IP",
+
+                                sDefaultContent: ''
+                            },
+
+                            {
+                                "mData": "IP - Taxa de Instrução de Processo, 500,00",
+
+                                sDefaultContent: ''
+                            },
+
+                            {
+                                "mData": "IP - Taxa Ocupação Espaço Aéreo (4,50) e Taxa Ocupação Temporária (8,00)",
+
+                                sDefaultContent: ''
+                            },
+
+                            {
+                                "mData": "IP - Taxa Ocupação Temporária ZE-Portaria nº 357/2015 de 14 de Outubro art\\.4º-200,00 Euros",
+
+                                sDefaultContent: ''
+                            },
+
+                            {
+                                "mData": "Data de Parecer da EP",
+                                "render": function(mData) {
+                                    if (mData != null) {
+                                        if (moment(mData).format("DD/MM/YYYY") != 'Invalid date') {
+
+                                            return moment(mData).format("DD/MM/YYYY");
+
+                                        } else {
+                                            return mData;
+                                        }
                                     }
-                                }
+                                },
+                                sDefaultContent: ''
                             },
-                            sDefaultContent: ''
-                        },
 
-                        {
-                            "mData": "Pedido de Vistoria",
-                            "render": function(mData) {
-                                if (mData != null) {
-                                    if (moment(mData).format("DD/MM/YYYY") == 'Invalid date') {
-                                        return mData;
-                                    } else {
-                                        return moment(mData).format("DD/MM/YYYY");
+                            {
+                                "mData": "Alvará Licença",
+                                "render": function(mData) {
+                                    if (mData != null) {
+                                        if (moment(mData).format("DD/MM/YYYY") != 'Invalid date') {
+
+                                            return moment(mData).format("DD/MM/YYYY");
+
+                                        } else {
+                                            return mData;
+                                        }
                                     }
-                                }
-                            },
-                            sDefaultContent: ''
-                        },
+                                },
 
-                        {
-                            "mData": "Licença de Exploração",
-                            "render": function(mData) {
-                                if (mData != null) {
-                                    if (moment(mData).format("DD/MM/YYYY") == 'Invalid date') {
-                                        return mData;
-                                    } else {
-                                        return moment(mData).format("DD/MM/YYYY");
+                                sDefaultContent: ''
+                            },
+
+                            {
+                                "mData": "Refer(Infraestruturas de Portugal CN-NI)",
+                                "render": function(mData) {
+                                    if (mData != null) {
+                                        if (moment(mData).format("DD/MM/YYYY") == 'Invalid date') {
+                                            return mData;
+                                        } else {
+                                            return moment(mData).format("DD/MM/YYYY");
+                                        }
                                     }
-                                }
+                                },
+                                sDefaultContent: ''
                             },
-                            sDefaultContent: ''
-                        },
 
-                        {
-                            "mData": "Referência DRE 171/10\\.01/\\.\\.",
+                            {
+                                "mData": "Refer",
 
-                            sDefaultContent: ''
-                        },
+                                sDefaultContent: ''
+                            },
 
-                        {
-                            "mData": "Avisos",
-
-                            sDefaultContent: ''
-                        },
-
-                        {
-                            "mData": "Observações",
-
-                            sDefaultContent: ''
-                        },
-
-                        {
-                            "mData": "IF",
-
-                            sDefaultContent: ''
-                        },
-
-                        {
-                            "mData": "SGD",
-
-                            sDefaultContent: ''
-                        },
-
-                        {
-                            "mData": "DTA PGT",
-                            "render": function(mData) {
-                                if (mData != null) {
-                                    if (moment(mData).format("DD/MM/YYYY") == 'Invalid date') {
-                                        return mData;
-                                    } else {
-                                        return moment(mData).format("DD/MM/YYYY");
+                            {
+                                "mData": "PNSAC",
+                                "render": function(mData) {
+                                    if (mData != null) {
+                                        if (moment(mData).format("DD/MM/YYYY") == 'Invalid date') {
+                                            return mData;
+                                        } else {
+                                            return moment(mData).format("DD/MM/YYYY");
+                                        }
                                     }
-                                }
+                                },
+                                sDefaultContent: ''
                             },
-                            sDefaultContent: ''
-                        }],
-						"createdRow": function(row, data, dataIndex) {
-					
-                        if (data['Licença de Exploração'] != undefined) {
-							
-                            $(row).addClass('yellow');
 
+                            {
+                                "mData": "ICN",
+                                "render": function(mData) {
+                                    if (mData != null) {
+                                        if (moment(mData).format("DD/MM/YYYY") == 'Invalid date') {
+                                            return mData;
+                                        } else {
+                                            return moment(mData).format("DD/MM/YYYY");
+                                        }
+                                    }
+                                },
+                                sDefaultContent: ''
+                            },
+
+                            {
+                                "mData": "Taxas-NI",
+                                "render": function(mData) {
+                                    if (mData != null) {
+                                        if (moment(mData).format("DD/MM/YYYY") == 'Invalid date') {
+                                            return mData;
+                                        } else {
+                                            return moment(mData).format("DD/MM/YYYY");
+                                        }
+                                    }
+                                },
+                                sDefaultContent: ''
+                            },
+
+                            {
+                                "mData": "Taxas-Pag",
+                                "render": function(mData) {
+                                    if (mData != null) {
+                                        if (moment(mData).format("DD/MM/YYYY") == 'Invalid date') {
+                                            return mData;
+                                        } else {
+                                            return moment(mData).format("DD/MM/YYYY");
+                                        }
+                                    }
+                                },
+                                sDefaultContent: ''
+                            },
+
+                            {
+                                "mData": "Licenciamento",
+                                "render": function(mData) {
+                                    if (mData != null) {
+                                        if (moment(mData).format("DD/MM/YYYY") == 'Invalid date') {
+                                            return mData;
+                                        } else {
+                                            return moment(mData).format("DD/MM/YYYY");
+                                        }
+                                    }
+                                },
+                                sDefaultContent: ''
+                            },
+
+                            {
+                                "mData": "Pedido de Vistoria",
+                                "render": function(mData) {
+                                    if (mData != null) {
+                                        if (moment(mData).format("DD/MM/YYYY") == 'Invalid date') {
+                                            return mData;
+                                        } else {
+                                            return moment(mData).format("DD/MM/YYYY");
+                                        }
+                                    }
+                                },
+                                sDefaultContent: ''
+                            },
+
+                            {
+                                "mData": "Licença de Exploração",
+                                "render": function(mData) {
+                                    if (mData != null) {
+                                        if (moment(mData).format("DD/MM/YYYY") == 'Invalid date') {
+                                            return mData;
+                                        } else {
+                                            return moment(mData).format("DD/MM/YYYY");
+                                        }
+                                    }
+                                },
+                                sDefaultContent: ''
+                            },
+
+                            {
+                                "mData": "Referência DRE 171/10\\.01/\\.\\.",
+
+                                sDefaultContent: ''
+                            },
+
+                            {
+                                "mData": "Avisos",
+
+                                sDefaultContent: ''
+                            },
+
+                            {
+                                "mData": "Observações",
+
+                                sDefaultContent: ''
+                            },
+
+                            {
+                                "mData": "IF",
+
+                                sDefaultContent: ''
+                            },
+
+                            {
+                                "mData": "SGD",
+
+                                sDefaultContent: ''
+                            },
+
+                            {
+                                "mData": "DTA PGT",
+                                "render": function(mData) {
+                                    if (mData != null) {
+                                        if (moment(mData).format("DD/MM/YYYY") == 'Invalid date') {
+                                            return mData;
+                                        } else {
+                                            return moment(mData).format("DD/MM/YYYY");
+                                        }
+                                    }
+                                },
+                                sDefaultContent: ''
+                            }
+                        ],
+                        "createdRow": function(row, data, dataIndex) {
+
+                            if (data['Licença de Exploração'] != undefined) {
+
+                                $(row).addClass('yellow');
+
+                            }
                         }
-					}
-					
-                });
-				
-							$('#example tbody').on( 'click', 'tr', function () {
-					if ( $(this).hasClass('selected') ) {
-						$(this).removeClass('selected');
-					}
-					else {
-						table.$('tr.selected').removeClass('selected');
-						$(this).addClass('selected');
-					}
-				} );
-			 
-				$('#button').click( function () {
-					table.row('.selected').remove().draw( false );
-				} );
+
+                    });
 
 
-                // Apply the search
-                table.columns().every(function() {
-                    var that = this;
+                    // Apply the search
+                    table.columns().every(function() {
+                        var that = this;
 
-                    $('input', this.footer()).on('keyup change', function() {
-                        if (that.search() !== this.value) {
-                            that
-                                .search(this.value)
-                                .draw();
+                        $('input', this.footer()).on('keyup change', function() {
+                            if (that.search() !== this.value) {
+                                that
+                                    .search(this.value)
+                                    .draw();
+                            }
+                        });
+                    });
+
+                    $('#tabela-data tbody').on('click', 'tr', function() {
+                        if ($(this).hasClass('selected')) {
+                            $(this).removeClass('selected');
+                        } else {
+                            table.$('tr.selected').removeClass('selected');
+                            $(this).addClass('selected');
                         }
                     });
+
+                    $('#button').click(function() {
+                        table.row('.selected').remove().draw(false);
+                    });
+
+
+
+
                 });
-	});
             }
-		
         </script>
         <script src="assets/js/main.js"></script>
 
         <script src="assets/vendor/spin.js"></script>
 
-	
+
 
 
         <h1 align="center">LICENCIAMENTOS</h1>
-            <h2 align="center" >Alcobaça</h2>
-            <h3> </h3>
+        <h2 align="center">Alcobaça</h2>
+        <h3> </h3>
 
-            <div>&nbsp;</div>
-            <table id="tabela-data" class="cell-border" cellspacing="0" style="text-align:center; margin: 0 auto" width="100%">
-                <thead>
-                    <tr>
-                        <th colspan="35"></th>
-                        <th colspan="3" stryle="text-align:center">INDEMNIZAÇÕES</th>
+        <div>&nbsp;</div>
+        <table id="tabela-data" class="cell-border" cellspacing="0" style="text-align:center; margin: 0 auto" width="100%">
+            <thead>
+                <tr>
+                    <th colspan="35"></th>
+                    <th colspan="3" stryle="text-align:center">INDEMNIZAÇÕES</th>
 
-                    </tr>
-                    <tr>
-                        <th style="text-align:center">Situação</th>
-                        <th style="text-align:center">Nº PT</th>
-                        <th style="text-align:center">kV</th>
-                        <th style="text-align:center">S/A</th>
-                        <th style="text-align:center">Nome</th>
-                        <th style="text-align:center">Comprimento (m)</th>
-                        <th style="text-align:center">EDIS</th>
-                        <th style="text-align:center">Licenciamento Externo</th>
-                        <th style="text-align:center">Data de Execução</th>
-                        <th style="text-align:center">APE</th>
-                        <th style="text-align:center">DREC/DRELVT</th>
-                        <th style="text-align:center">A-P-E-</th>
-                        <th style="text-align:center">Éditos - GBCI</th>
-                        <th style="text-align:center">GBCI - Recortes</th>
-                        <th style="text-align:center">Éditos - ME</th>
-                        <th style="text-align:center">AELO</th>
-                        <th style="text-align:center">Portugal Telecom</th>
-                        <th style="text-align:center">IP</th>
-                        <th style="text-align:center">IP - Taxas de Instrução do Processo</th>
-                        <th style="text-align:center">IP - Taxa Ocupação Espaço Aéreo/Ocupação Temporária</th>
-                        <th style="text-align:center">IP - Taxa Ocupação Temporária ZE</th>
-                        <th style="text-align:center">Data de Parecer da EP</th>
-                        <th style="text-align:center">Alvará Licença</th>
-                        <th style="text-align:center">Refer(Infraestruturas de Portugal CN-NI))</th>
-                        <th style="text-align:center">Refer</th>
-                        <th style="text-align:center">PNSAC</th>
-                        <th style="text-align:center">ICN</th>
-                        <th style="text-align:center">Taxas-NI</th>
-                        <th style="text-align:center">Taxas-Pag</th>
-                        <th style="text-align:center">Licenciamento</th>
-                        <th style="text-align:center">Pedido de Vistoria</th>
-                        <th style="text-align:center">Licença de Exploração</th>
-                        <th style="text-align:center">Referência DRE 171/10.01/...</th>
-                        <th style="text-align:center">Avisos</th>
-                        <th style="text-align:center">Observações</th>
-                        <th style="text-align:center">IF</th>
-                        <th style="text-align:center">SGD</th>
-                        <th style="text-align:center">DTA PGT</th>
-                    </tr>
-                </thead>
-                <tfoot>
-                    <tr>
-                        <th style="text-align:center"></th>
-                        <th style="text-align:center">Nº PT</th>
-                        <th style="text-align:center">kV</th>
-                        <th style="text-align:center">S/A</th>
-                        <th style="text-align:center">Nome</th>
-                        <th style="text-align:center">Comprimento (m)</th>
-                        <th style="text-align:center">EDIS</th>
-                        <th style="text-align:center">Licenciamento Externo</th>
-                        <th style="text-align:center">Data de Execução</th>
-                        <th style="text-align:center">APE</th>
-                        <th style="text-align:center">DREC/DRELVT</th>
-                        <th style="text-align:center">A-P-E-</th>
-                        <th style="text-align:center">Éditos - GBCI</th>
-                        <th style="text-align:center">GBCI - Recortes</th>
-                        <th style="text-align:center">Éditos - ME</th>
-                        <th style="text-align:center">AELO</th>
-                        <th style="text-align:center">Portugal Telecom</th>
-                        <th style="text-align:center">IP</th>
-                        <th style="text-align:center">IP - Taxas de Instrução do Processo</th>
-                        <th style="text-align:center">IP - Taxa Ocupação Espaço Aéreo/Ocupação Temporária</th>
-                        <th style="text-align:center">IP - Taxa Ocupação Temporária ZE</th>
-                        <th style="text-align:center">Data de Parecer da EP</th>
-                        <th style="text-align:center">Alvará Licença</th>
-                        <th style="text-align:center">Refer(Infraestruturas de Portugal CN-NI))</th>
-                        <th style="text-align:center">Refer</th>
-                        <th style="text-align:center">PNSAC</th>
-                        <th style="text-align:center">ICN</th>
-                        <th style="text-align:center">Taxas-NI</th>
-                        <th style="text-align:center">Taxas-Pag</th>
-                        <th style="text-align:center">Licenciamento</th>
-                        <th style="text-align:center">Pedido de Vistoria</th>
-                        <th style="text-align:center">Licença de Exploração</th>
-                        <th style="text-align:center">Referência DRE 171/10.01/...</th>
-                        <th style="text-align:center">Avisos</th>
-                        <th style="text-align:center">Observações</th>
-                        <th style="text-align:center">IF</th>
-                        <th style="text-align:center">SGD</th>
-                        <th style="text-align:center">DTA PGT</th>
-                    </tr>
-                </tfoot>
-            </table>
+                </tr>
+                <tr>
+                    <th style="text-align:center">Situação</th>
+                    <th style="text-align:center">Nº PT</th>
+                    <th style="text-align:center">kV</th>
+                    <th style="text-align:center">S/A</th>
+                    <th style="text-align:center">Nome</th>
+                    <th style="text-align:center">Comprimento (m)</th>
+                    <th style="text-align:center">EDIS</th>
+                    <th style="text-align:center">Licenciamento Externo</th>
+                    <th style="text-align:center">Data de Execução</th>
+                    <th style="text-align:center">APE</th>
+                    <th style="text-align:center">DREC/DRELVT</th>
+                    <th style="text-align:center">A-P-E-</th>
+                    <th style="text-align:center">Éditos - GBCI</th>
+                    <th style="text-align:center">GBCI - Recortes</th>
+                    <th style="text-align:center">Éditos - ME</th>
+                    <th style="text-align:center">AELO</th>
+                    <th style="text-align:center">Portugal Telecom</th>
+                    <th style="text-align:center">IP</th>
+                    <th style="text-align:center">IP - Taxas de Instrução do Processo</th>
+                    <th style="text-align:center">IP - Taxa Ocupação Espaço Aéreo/Ocupação Temporária</th>
+                    <th style="text-align:center">IP - Taxa Ocupação Temporária ZE</th>
+                    <th style="text-align:center">Data de Parecer da EP</th>
+                    <th style="text-align:center">Alvará Licença</th>
+                    <th style="text-align:center">Refer(Infraestruturas de Portugal CN-NI))</th>
+                    <th style="text-align:center">Refer</th>
+                    <th style="text-align:center">PNSAC</th>
+                    <th style="text-align:center">ICN</th>
+                    <th style="text-align:center">Taxas-NI</th>
+                    <th style="text-align:center">Taxas-Pag</th>
+                    <th style="text-align:center">Licenciamento</th>
+                    <th style="text-align:center">Pedido de Vistoria</th>
+                    <th style="text-align:center">Licença de Exploração</th>
+                    <th style="text-align:center">Referência DRE 171/10.01/...</th>
+                    <th style="text-align:center">Avisos</th>
+                    <th style="text-align:center">Observações</th>
+                    <th style="text-align:center">IF</th>
+                    <th style="text-align:center">SGD</th>
+                    <th style="text-align:center">DTA PGT</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th style="text-align:center"></th>
+                    <th style="text-align:center">Nº PT</th>
+                    <th style="text-align:center">kV</th>
+                    <th style="text-align:center">S/A</th>
+                    <th style="text-align:center">Nome</th>
+                    <th style="text-align:center">Comprimento (m)</th>
+                    <th style="text-align:center">EDIS</th>
+                    <th style="text-align:center">Licenciamento Externo</th>
+                    <th style="text-align:center">Data de Execução</th>
+                    <th style="text-align:center">APE</th>
+                    <th style="text-align:center">DREC/DRELVT</th>
+                    <th style="text-align:center">A-P-E-</th>
+                    <th style="text-align:center">Éditos - GBCI</th>
+                    <th style="text-align:center">GBCI - Recortes</th>
+                    <th style="text-align:center">Éditos - ME</th>
+                    <th style="text-align:center">AELO</th>
+                    <th style="text-align:center">Portugal Telecom</th>
+                    <th style="text-align:center">IP</th>
+                    <th style="text-align:center">IP - Taxas de Instrução do Processo</th>
+                    <th style="text-align:center">IP - Taxa Ocupação Espaço Aéreo/Ocupação Temporária</th>
+                    <th style="text-align:center">IP - Taxa Ocupação Temporária ZE</th>
+                    <th style="text-align:center">Data de Parecer da EP</th>
+                    <th style="text-align:center">Alvará Licença</th>
+                    <th style="text-align:center">Refer(Infraestruturas de Portugal CN-NI))</th>
+                    <th style="text-align:center">Refer</th>
+                    <th style="text-align:center">PNSAC</th>
+                    <th style="text-align:center">ICN</th>
+                    <th style="text-align:center">Taxas-NI</th>
+                    <th style="text-align:center">Taxas-Pag</th>
+                    <th style="text-align:center">Licenciamento</th>
+                    <th style="text-align:center">Pedido de Vistoria</th>
+                    <th style="text-align:center">Licença de Exploração</th>
+                    <th style="text-align:center">Referência DRE 171/10.01/...</th>
+                    <th style="text-align:center">Avisos</th>
+                    <th style="text-align:center">Observações</th>
+                    <th style="text-align:center">IF</th>
+                    <th style="text-align:center">SGD</th>
+                    <th style="text-align:center">DTA PGT</th>
+                </tr>
+            </tfoot>
+        </table>
 
 
 
@@ -635,16 +647,25 @@
 
 </body>
 <style>
-h1 {
-  font-weight: bold;
-	font-family: 'Helvetica', 'Arial', sans-serif;
-  font-size: 25px;
-}
+    td {
+        font-size: 11px;
+    }
 
-h2 {
-  font-weight: bold;
-font-family: 'Helvetica', 'Arial', sans-serif;
-  font-size: 24px;
-}
+    .datatablerowhighlight {
+        background-color: #EFEFFC !important;
+    }
+
+    h1 {
+        font-weight: bold;
+        font-family: 'Helvetica', 'Arial', sans-serif;
+        font-size: 25px;
+    }
+
+    h2 {
+        font-weight: bold;
+        font-family: 'Helvetica', 'Arial', sans-serif;
+        font-size: 24px;
+    }
 </style>
+
 </html>
